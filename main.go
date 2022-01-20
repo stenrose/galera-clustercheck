@@ -40,12 +40,6 @@ var (
 	dataSourceName        = ""
 )
 
-type Checker struct {
-	wsrepLocalIndexStmt *sql.Stmt
-	wsrepLocalStateStmt *sql.Stmt
-	readOnlyStmt        *sql.Stmt
-}
-
 func main() {
 	flag.Parse()
 
@@ -110,6 +104,12 @@ func parseConfigFile() {
 			*password = strings.Trim(tmp[1], " ")
 		}
 	}
+}
+
+type Checker struct {
+	wsrepLocalIndexStmt *sql.Stmt
+	wsrepLocalStateStmt *sql.Stmt
+	readOnlyStmt        *sql.Stmt
 }
 
 func (c *Checker) Root(w http.ResponseWriter, r *http.Request) {
