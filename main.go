@@ -154,7 +154,7 @@ func (c *Checker) Clustercheck(w http.ResponseWriter, r *http.Request, requireMa
 	readOnlyErr := c.readOnlyStmt.QueryRow().Scan(&fieldName, &readOnly)
 	if readOnlyErr != nil {
 		log.Println(remoteIp, readOnlyErr.Error())
-		http.Error(w, readOnlyErr.Error(), http.StatusInternalServerError)
+		http.Error(w, "Error while running readOnlyStmt", http.StatusInternalServerError)
 		return
 	}
 
@@ -167,7 +167,7 @@ func (c *Checker) Clustercheck(w http.ResponseWriter, r *http.Request, requireMa
 	wsrepLocalStateErr := c.wsrepLocalStateStmt.QueryRow().Scan(&fieldName, &wsrepLocalState)
 	if wsrepLocalStateErr != nil {
 		log.Println(remoteIp, wsrepLocalStateErr.Error())
-		http.Error(w, wsrepLocalStateErr.Error(), http.StatusInternalServerError)
+		http.Error(w, "Error while running wsrepLocalStateStmt", http.StatusInternalServerError)
 		return
 	}
 
@@ -203,7 +203,7 @@ func (c *Checker) Clustercheck(w http.ResponseWriter, r *http.Request, requireMa
 			wsrepLocalIndexErr := c.wsrepLocalIndexStmt.QueryRow().Scan(&fieldName, &wsrepLocalIndex)
 			if wsrepLocalIndexErr != nil {
 				log.Println(remoteIp, wsrepLocalIndexErr.Error())
-				http.Error(w, wsrepLocalIndexErr.Error(), http.StatusInternalServerError)
+				http.Error(w, "Error while running wsrepLocalIndexStmt", http.StatusInternalServerError)
 				return
 			}
 			if wsrepLocalIndex == 0 {
